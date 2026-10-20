@@ -1,56 +1,159 @@
-# Welcome to your Expo app 👋
+# TiMed
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+**A Goal-Based Intelligent Agent for Medication Adherence with Computer Vision-Based Pill Verification**
 
-## Get started
+TiMed is a mobile application developed as an academic project for CS 403 – Intelligent Agents. It aims to support medication adherence through scheduled reminders, adherence tracking, intelligent agent monitoring, and experimental computer vision-based pill appearance classification.
 
-1. Install dependencies
+## Features
 
-   ```bash
-   npm install
-   ```
+- Medication management and reminder scheduling
+- Local medication notifications
+- Taken and Missed dose recording
+- Intelligent agent monitoring of medication schedules and overdue, unconfirmed doses
+- Follow-up prompts for unconfirmed doses
+- Seven-day adherence pattern analysis
+- Medication history and dashboard insights
+- Experimental pill appearance classification using MobileNetV3-Small
 
-2. Start the app
+## Technologies
 
-   ```bash
-   npx expo start
-   ```
+**Mobile Application**
 
-In the output, you'll find options to open the app in a
+- React Native
+- Expo
+- TypeScript
+- Expo Router
+- SQLite
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+**Machine Learning Backend**
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+- Python 3.12
+- FastAPI
+- PyTorch
+- Torchvision
+- MobileNetV3-Small
 
-## Get a fresh project
+## Project Structure
 
-When you're ready, run:
-
-```bash
-npm run reset-project
+```text
+TiMed/
+├── assets/
+├── src/
+│   ├── app/
+│   ├── data/
+│   ├── database/
+│   └── services/
+├── ml-backend/
+│   ├── api.py
+│   ├── models/
+│   ├── requirements.txt
+│   └── training and evaluation scripts
+├── app.json
+├── package.json
+└── README.md
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+## Getting Started
 
-### Other setup steps
+### 1. Clone the Repository
 
-- To set up ESLint for linting, run `npx expo lint`, or follow our guide on ["Using ESLint and Prettier"](https://docs.expo.dev/guides/using-eslint/)
-- If you'd like to set up unit testing, follow our guide on ["Unit Testing with Jest"](https://docs.expo.dev/develop/unit-testing/)
-- Learn more about the TypeScript setup in this template in our guide on ["Using TypeScript"](https://docs.expo.dev/guides/typescript/)
+```bash
+git clone https://github.com/Leinor-A/TiMed.git
+cd TiMed
+```
 
-## Learn more
+### 2. Set Up the Mobile Application
 
-To learn more about developing your project with Expo, look at the following resources:
+Install the Node.js dependencies:
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+```bash
+npm install
+```
 
-## Join the community
+Start the Expo development server:
 
-Join our community of developers creating universal apps.
+```bash
+npx expo start
+```
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+Open the application using Expo Go on a compatible device.
+
+If your network restricts local device connections, try:
+
+```bash
+npx expo start --tunnel
+```
+
+### 3. Set Up the ML Backend
+
+Open another terminal and navigate to the backend:
+
+```bash
+cd ml-backend
+```
+
+Create a Python virtual environment:
+
+```bash
+python -m venv .venv
+```
+
+Activate it in Windows Git Bash:
+
+```bash
+source .venv/Scripts/activate
+```
+
+Install the dependencies:
+
+```bash
+python -m pip install -r requirements.txt
+```
+
+Start the FastAPI server:
+
+```bash
+python -m uvicorn api:app --host 0.0.0.0 --port 8000
+```
+
+The API documentation should be accessible at:
+
+```text
+http://localhost:8000/docs
+```
+
+The mobile application must be configured to connect to the backend server's reachable network address. `localhost` on a physical phone does not refer to the development laptop.
+
+### 4. Run the Complete System
+
+Keep both development servers running:
+
+- Expo development server for the mobile application
+- FastAPI server for the experimental computer vision functionality
+
+The mobile application stores medication and adherence information locally using SQLite.
+
+## Intelligent Agent
+
+TiMed's goal-based agent supports medication adherence by evaluating medication schedules, tracking user-reported dose responses, identifying overdue unconfirmed doses, and analyzing recent adherence patterns.
+
+The current agent primarily uses rule-based decision-making and pattern analysis. Learning-based adherence prediction is a potential future enhancement.
+
+## Computer Vision
+
+The experimental computer vision component uses a MobileNetV3-Small image classification model trained on a limited two-class pill image dataset.
+
+**Important limitations:**
+
+- Image classification results do not confirm a medication's identity.
+- The model is not clinically validated.
+- Image classification does not prove medication ingestion.
+- The application is an academic prototype and is not a substitute for professional medical advice.
+
+## Collaboration
+
+Group members should create separate Git branches when developing features and submit pull requests for review before merging changes into `main`.
+
+## Project Status
+
+Academic prototype under development. Core medication scheduling, adherence tracking, agent monitoring, and experimental computer vision functionality have been implemented. Further testing, evaluation, and refinement are ongoing.
